@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="Zee.Sample.CaveatEmptor.Model"
+                   namespace="Zee.Sample.CaveatEmptor.Model">
+
+  <class name="Bid" schema ="TestDB.dbo" table="Bid">
+    <id name="Id" column="BID_ID" access="field">
+      <generator class="native" />
+    </id>
+
+    <property name="Version" access="field" column="VERSION" />
+    <property name="Amount" access="field" column="" />
+    
+  </class>
+
+</hibernate-mapping>

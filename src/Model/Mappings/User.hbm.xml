@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="Zee.Sample.CaveatEmptor.Model"
+                   namespace="Zee.Sample.CaveatEmptor.Model">
+
+  <class name="User" schema ="TestDB.dbo" table="USERS">
+    <id name="Id" column="USER_ID" access="field">
+      <generator class="native" />
+    </id>
+
+    <property name="Version" column="VERSION" access="field"  />
+    <property name="Firstname" column="FIRST_NAME" not-null="true" type="String" />
+    <property name="Lastname" column="LAST_NAME" not-null="true" />
+    <property name="Username" column="USERNAME" not-null="true" access="field" update="false" length="16" />
+    <property name="Password" column="[PASSWORD]" not-null="true" />
+    <property name="Email" column="EMAIL" not-null="true" />
+    <property name="Ranking" column="RANKING" not-null="true" />
+    <property name="Created" column="CREATED" access="field" not-null="true" update="false" />
+
+    <component name="HomeAddress" class="Zee.Sample.CaveatEmptor.Model.Address" >
+      <property name="Street" type="String" column="HOME_STREET" not-null="true" />
+      <property name="City" type="String" column="HOME_CITY" not-null="true" />
+      <property name="Zipcode" type="Int16" column="HOME_ZIPCODE" not-null="true" />
+    </component>
+    
+    
+  </class>
+
+</hibernate-mapping>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Model
+namespace Zee.Sample.CaveatEmptor.Model
 {
     public class Class1
     {

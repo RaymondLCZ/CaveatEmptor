@@ -76,14 +76,12 @@ namespace Zee.Sample.CaveatEmptor.Model
             set { street = value; }
         }
 
-        [Property(Column = "ZIP_CODE")]
         public virtual string Zipcode
         {
             get { return zipcode; }
             set { zipcode = value; }
         }
 
-        [Property(Column = "CITY")]
         public virtual string City
         {
             get { return city; }

@@ -131,13 +131,11 @@ namespace Zee.Sample.CaveatEmptor.Model
             ForeignKey = "FK1_DEFAULT_BILLING_DETAILS_ID")]
         public virtual BillingDetails DefaultBillingDetails { get; set; }
 
-        [Property(Column = "CREATED", Access = "nosetter.camelcase", Update = false, NotNull = true)]
         public virtual DateTime Created
         {
             get { return created; }
         }
 
-        [Property(Column = "IS_ADMIN", NotNull = true)]
         public virtual bool IsAdmin { get; set; }
 
 

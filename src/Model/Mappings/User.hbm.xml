@@ -16,6 +16,7 @@
     <property name="Email" column="EMAIL" not-null="true" />
     <property name="Ranking" column="RANKING" not-null="true" />
     <property name="Created" column="CREATED" access="field" not-null="true" update="false" />
+    <property name="IsAdmin" column="IS_ADMIN" not-null="true" />
 
     <component name="HomeAddress" class="Zee.Sample.CaveatEmptor.Model.Address" >
       <property name="Street" type="String" column="HOME_STREET" not-null="true" />
@@ -23,6 +24,12 @@
       <property name="Zipcode" type="Int16" column="HOME_ZIPCODE" not-null="true" />
     </component>
     
+    <component name="BillingAddress" class="Zee.Sample.CaveatEmptor.Model.Address" >
+      
+      <property name="Street" type="String" column="BILLING_STREET" not-null="true" />
+      <property name="City" type="String" column="BILLING_CITY" not-null="true" />
+      <property name="Zipcode" type="Int16" column="BILLING_ZIPCODE" not-null="true" />
+    </component>
     
   </class>
 

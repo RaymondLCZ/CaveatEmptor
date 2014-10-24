@@ -44,6 +44,7 @@ namespace Zee.Sample.CaveatEmptor.Model
         private string password;
         private int version;
 
+        #region constructor
         /// <summary> No-arg constructor for tools.</summary>
         protected User()        {        }
 
@@ -72,6 +73,7 @@ namespace Zee.Sample.CaveatEmptor.Model
             this.password = password;
             this.email = email;
         }
+        #endregion
 
         public virtual long Id
         {

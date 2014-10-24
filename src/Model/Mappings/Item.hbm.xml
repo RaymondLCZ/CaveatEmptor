@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   assembly="Zee.Sample.CaveatEmptor.Model"
+                   namespace="Zee.Sample.CaveatEmptor.Model">
+  
+  <class name="Item" table="ITEM" lazy="true">
+    <id name="Id" column="ITEM_ID" access="field">
+      <generator class="native" />
+    </id>
+
+    <version name="Version" column="VERSION" access="field" />
+    <property name="Name" column="NAME" access="field" length="255" not-null="true" update="false" />
+    <property name="Description" column="DESCRIPTION" access="field" length="4000" not-null="true" />
+    <property name="InitialPrice" access="field" type="Zee.Sample.CaveatEmptor.Model.MonetaryAmount, Zee.Sample.CaveatEmptor.Model" >
+      <column name="INITIAL_PRICE" length="2" not-null="true" />
+      <column name="INITIAL_PRICE_CURRENCY" not-null="true" />
+    </property>
+    <property name="ReservePrice" access="field">
+      <column name="RESERVE_PRICE" length="2" not-null="true" />
+      <column name="RESERVE_PRICE_CURRENCY" not-null="true" />
+      <type name="Zee.Sample.CaveatEmptor.Model.MonetaryAmount, Zee.Sample.CaveatEmptor.Model" />
+    </property>
+    <property name="StartDate" column="START_DATE" access="field" not-null="true" update="false" />
+    <property name="EndDate" column="END_DATE" access="field" not-null="true" update="false" />
+    <property name="State" column="STATE" not-null="true" access="field" />
+    <property name="ApprovalDatetime" column="APPROVAL_DATETIME" not-null="false" />
+    <property name="Created" column="CREATED" access="field" not-null="true" update="false" />
+
+    <many-to-one name="ApprovedBy" column="APPROVED_BY_USER_ID" class="User" foreign-key="FK1_APPROVED_BY_USER_ID" />
+    <many-to-one name="Seller" column="SELLER_ID" class="User" access="field" not-null="true" update="false" outer-join="false" />
+    <many-to-one name="SuccessfulBid" column="SUCCESSFUL_BID_ID" not-null="false" outer-join="false" />
+
+    <set name="Bids" access="field" inverse="true" cascade="All">
+      <key column="ITEM_ID" />
+      <one-to-many class="Bid" />
+    </set>
+    
+  </class>
+</hibernate-mapping>

@@ -10,6 +10,9 @@ namespace Zee.Sample.CaveatEmptor.Model
     [Serializable]
     public class MonetaryAmount
     {
+        private double _value;
+        private string _currency;
+
         public virtual string Currency
         {
             get { return _currency; }
@@ -21,18 +24,13 @@ namespace Zee.Sample.CaveatEmptor.Model
             get { return _value; }
 
         }
-
-        private double _value;
-        private string _currency;
-
-
+        
         public MonetaryAmount(double value, string currency)
         {
             this._value = value;
             this._currency = currency;
         }
-
-
+        
         #region Common Methods
 
         public override bool Equals(object o)
@@ -62,12 +60,10 @@ namespace Zee.Sample.CaveatEmptor.Model
             return result;
         }
 
-
         public override string ToString()
         {
             return "Value: '" + Value + "', " + "Currency: '" + Currency + "'";
         }
-
 
         public virtual int CompareTo(object o)
         {

@@ -121,7 +121,6 @@ namespace Zee.Sample.CaveatEmptor.Model
         /// <remarks>
         /// We can't change the creation time, so map it with update="false".
         /// </remarks>
-        [Property(Update = false, NotNull = true, Access = "nosetter.camelcase", Column = "CREATED")]
         public virtual DateTime Created
         {
             get { return created; }

@@ -12,7 +12,6 @@ namespace Zee.Sample.CaveatEmptor.Model
     /// it is a component.
     /// </summary>
     [Serializable]
-    [Component(Update = false)]
     public class Address
     {
         private string city;

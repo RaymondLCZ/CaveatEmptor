@@ -58,7 +58,7 @@ namespace Zee.Sample.CaveatEmptor.Model
         {
             // Billing Details are simply sorted by creation date
             if (o is BillingDetails)
-                return Created.CompareTo(((BillingDetails) o).Created);
+                return Created.CompareTo(((BillingDetails)o).Created);
             return 0;
         }
 
@@ -69,7 +69,7 @@ namespace Zee.Sample.CaveatEmptor.Model
             if (!(o is BillingDetails))
                 return false;
 
-            var billingDetails = (BillingDetails) o;
+            var billingDetails = (BillingDetails)o;
 
             if (Created != billingDetails.Created)
                 return false;
@@ -84,7 +84,7 @@ namespace Zee.Sample.CaveatEmptor.Model
         {
             int result;
             result = Created.GetHashCode();
-            result = 29*result + OwnerName.GetHashCode();
+            result = 29 * result + OwnerName.GetHashCode();
             return result;
         }
 
@@ -130,4 +130,5 @@ namespace Zee.Sample.CaveatEmptor.Model
         /// Check algorithm is implemented in subclasses.
         /// </summary>
         public abstract bool Valid { get; }
+    }
 }

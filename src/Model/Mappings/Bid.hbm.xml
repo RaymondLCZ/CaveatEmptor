@@ -4,13 +4,16 @@
                    assembly="Zee.Sample.CaveatEmptor.Model"
                    namespace="Zee.Sample.CaveatEmptor.Model">
 
-  <class name="Bid" schema ="TestDB.dbo" table="Bid">
+  <class name="Bid" schema ="TestDB.dbo" table="BID">
     <id name="Id" column="BID_ID" access="field">
       <generator class="native" />
     </id>
 
-    <property name="Version" access="field" column="VERSION" />
-    <property name="Amount" access="field" column="" />
+    <version name="Version" column="VERSION" access="field" />
+    <property name="Amount" column="" access="field" />
+    <property name="Created" column="CREATED" access="field" not-null="true" />
+
+    <many-to-one name="Item" column="ITEM_ID" class="Item" not-null="true" />
     
   </class>
 

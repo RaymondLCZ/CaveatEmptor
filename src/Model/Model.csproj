@@ -44,10 +44,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="BankAccount.cs" />
     <Compile Include="Bid.cs" />
     <Compile Include="BillingDetails.cs" />
+    <Compile Include="CategorizedItemId.cs" />
     <Compile Include="Category.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="CategorizedItem.cs" />
+    <Compile Include="CreditCard.cs" />
+    <Compile Include="CreditCardType.cs" />
+    <Compile Include="Exceptions\BusinessException.cs" />
+    <Compile Include="Exceptions\InfrastructureException.cs" />
+    <Compile Include="Exceptions\PermissionException.cs" />
     <Compile Include="IAuditable.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="ItemState.cs" />
@@ -57,11 +64,14 @@
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Mappings\Bid.hbm.xml" />
-    <Content Include="Mappings\BillingDetails.hbm.xml" />
-    <Content Include="Mappings\Category.hbm.xml" />
-    <Content Include="Mappings\Item.hbm.xml" />
-    <Content Include="Mappings\User.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Bid.hbm.xml" />
+    <EmbeddedResource Include="Mappings\BillingDetails.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Category.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Item.hbm.xml" />
+    <EmbeddedResource Include="Mappings\User.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Mappings\CategorizedItem.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

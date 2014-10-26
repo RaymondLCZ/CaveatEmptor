@@ -5,16 +5,20 @@
                    namespace="Zee.Sample.CaveatEmptor.Model">
 
   <class name="Bid" schema ="TestDB.dbo" table="BID">
-    <id name="Id" column="BID_ID" access="field">
+    <id name="id" column="BID_ID" access="field">
       <generator class="native" />
     </id>
 
-    <version name="Version" column="VERSION" access="field" />
-    <property name="Amount" column="" access="field" />
-    <property name="Created" column="CREATED" access="field" not-null="true" />
+    <version name="version" column="VERSION" access="field" />
+    <!--<property name="amount" access="field" type="MonetaryAmount" update="false" >
+      <column name="INITIAL_PRICE" not-null="true" length="2" />
+      <column name="INITIAL_PRICE_CURRENCY" not-null="true" />
+      <type name="Zee.Sample.CaveatEmptor.Model.MonetaryAmount, Zee.Sample.CaveatEmptor.Model" />
+    </property>-->
+    <property name="created" column="CREATED" access="field" not-null="true" />
 
-    <many-to-one name="Item" column="ITEM_ID" class="Item" not-null="true" />
-    
+    <many-to-one name="item" column="ITEM_ID" access="field" class="Item" not-null="true" update="false" outer-join="false" />
+    <many-to-one name="bidder" column="BIDDER_ID" access="field" not-null="true" update="false" outer-join="false" />
   </class>
 
 </hibernate-mapping>

@@ -4,33 +4,42 @@
                    namespace="Zee.Sample.CaveatEmptor.Model">
 
   <class name="User" schema ="TestDB.dbo" table="USERS">
-    <id name="Id" column="USER_ID" access="field">
+    <id name="id" column="USER_ID" access="field">
       <generator class="native" />
     </id>
 
-    <property name="Version" column="VERSION" access="field"  />
+    <property name="version" column="VERSION" access="field"  />
     <property name="Firstname" column="FIRST_NAME" not-null="true" type="String" />
     <property name="Lastname" column="LAST_NAME" not-null="true" />
-    <property name="Username" column="USERNAME" not-null="true" access="field" update="false" length="16" />
+    <property name="username" column="USERNAME" not-null="true" access="field" update="false" length="16" />
     <property name="Password" column="[PASSWORD]" not-null="true" />
     <property name="Email" column="EMAIL" not-null="true" />
     <property name="Ranking" column="RANKING" not-null="true" />
-    <property name="Created" column="CREATED" access="field" not-null="true" update="false" />
+    <property name="created" column="CREATED" access="field" not-null="true" update="false" />
     <property name="IsAdmin" column="IS_ADMIN" not-null="true" />
 
     <component name="HomeAddress" class="Zee.Sample.CaveatEmptor.Model.Address" >
       <property name="Street" type="String" column="HOME_STREET" not-null="true" />
       <property name="City" type="String" column="HOME_CITY" not-null="true" />
-      <property name="Zipcode" type="Int16" column="HOME_ZIPCODE" not-null="true" />
+      <property name="Zipcode" type="String" column="HOME_ZIPCODE" not-null="true" />
     </component>
     
     <component name="BillingAddress" class="Zee.Sample.CaveatEmptor.Model.Address" >
-      
       <property name="Street" type="String" column="BILLING_STREET" not-null="true" />
       <property name="City" type="String" column="BILLING_CITY" not-null="true" />
-      <property name="Zipcode" type="Int16" column="BILLING_ZIPCODE" not-null="true" />
+      <property name="Zipcode" type="String" column="BILLING_ZIPCODE" not-null="true" />
     </component>
-    
-  </class>
 
+    <many-to-one name="DefaultBillingDetails" column="DEFAULT_BILLING_DETAILS_ID" not-null="false" foreign-key="FK1_DEFAULT_BILLING_DETAILS_ID" outer-join="false" />
+
+    <set name="items" access="field" inverse="true" cascade="none">
+      <key column="SELLER_ID" not-null="true" foreign-key="FK1_USER_ITEM" />
+      <one-to-many class="Item"/>
+    </set>
+
+    <set name="billingDetails" access="field" inverse="true" cascade="all-delete-orphan">
+      <key column="USER_ID" not-null="true" />
+      <one-to-many class="BillingDetails" />
+    </set>
+  </class>
 </hibernate-mapping>

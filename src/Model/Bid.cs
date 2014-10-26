@@ -7,6 +7,7 @@ namespace Zee.Sample.CaveatEmptor.Model
 {
     public class Bid : IComparable
     {
+        #region member field
         // Common id property.
         private readonly MonetaryAmount amount;
         private readonly User bidder;
@@ -14,6 +15,7 @@ namespace Zee.Sample.CaveatEmptor.Model
         private DateTime created = SystemTime.NowWithoutMilliseconds;
         private long id;
         private int version;
+        #endregion
 
         /// <summary> No-arg constructor for tools.</summary>
         protected Bid()
@@ -90,9 +92,6 @@ namespace Zee.Sample.CaveatEmptor.Model
         /// <remarks>
         /// UserType for prices, length is precision of decimal field for DDL.
         /// </remarks>
-        [Property(Update = false, TypeType = typeof(MonetaryAmountCompositeUserType), Access = "nosetter.camelcase")]
-        [Column(1, Name = "INITIAL_PRICE", NotNull = true, Length = 2)]
-        [Column(2, Name = "INITIAL_PRICE_CURRENCY", NotNull = true)]
         public virtual MonetaryAmount Amount
         {
             get { return amount; }
@@ -101,8 +100,6 @@ namespace Zee.Sample.CaveatEmptor.Model
         /// <remarks>
         /// The other side of this bidirectional one-to-many association to item.
         /// </remarks>
-        [ManyToOne(Update = false, NotNull = true, OuterJoin = OuterJoinStrategy.False, Access = "nosetter.camelcase",
-            Column = "ITEM_ID")]
         public virtual Item Item
         {
             get { return item; }
@@ -111,8 +108,6 @@ namespace Zee.Sample.CaveatEmptor.Model
         /// <remarks> 
         /// The other side of this bidirectional one-to-many association to user.
         /// </remarks>
-        [ManyToOne(Update = false, NotNull = true, OuterJoin = OuterJoinStrategy.True, Access = "nosetter.camelcase",
-            Column = "BIDDER_ID")]
         public virtual User Bidder
         {
             get { return bidder; }

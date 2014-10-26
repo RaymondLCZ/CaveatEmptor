@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Iesi.Collections;
+using Iesi.Collections.Generic;
+using Zee.Sample.CaveatEmptor.Model.Exceptions;
 
 /*
 A User is a versioned entity, with some special properties.
@@ -32,6 +34,7 @@ namespace Zee.Sample.CaveatEmptor.Model
     [Serializable]
     public class User : IComparable
     {
+        #region member field
         private readonly ISet<BillingDetails> billingDetails = new HashedSet<BillingDetails>();
         private readonly DateTime created = SystemTime.NowWithoutMilliseconds;
         private readonly ISet<Item> items = new HashedSet<Item>();
@@ -43,11 +46,11 @@ namespace Zee.Sample.CaveatEmptor.Model
         private string lastname;
         private string password;
         private int version;
+        #endregion
 
         #region constructor
         /// <summary> No-arg constructor for tools.</summary>
         protected User()        {        }
-
 
         /// <summary> Full constructor.</summary>
         public User(string firstname, string lastname, string username, string password, string email, Address address,
@@ -63,7 +66,6 @@ namespace Zee.Sample.CaveatEmptor.Model
             this.billingDetails = billingDetails;
         }
 
-
         /// <summary> Simple constructor.</summary>
         public User(string firstname, string lastname, string username, string password, string email)
         {
@@ -75,6 +77,7 @@ namespace Zee.Sample.CaveatEmptor.Model
         }
         #endregion
 
+        #region property
         public virtual long Id
         {
             get { return id; }
@@ -129,8 +132,6 @@ namespace Zee.Sample.CaveatEmptor.Model
         public virtual Address BillingAddress { get; set; }
 
         //The default billing strategy, may be null if no BillingDetails exist.
-        [ManyToOne(Column = "DEFAULT_BILLING_DETAILS_ID", NotNull = false, OuterJoin = OuterJoinStrategy.False,
-            ForeignKey = "FK1_DEFAULT_BILLING_DETAILS_ID")]
         public virtual BillingDetails DefaultBillingDetails { get; set; }
 
         public virtual DateTime Created
@@ -140,25 +141,17 @@ namespace Zee.Sample.CaveatEmptor.Model
 
         public virtual bool IsAdmin { get; set; }
 
-
-        [Set(0, Inverse = true, Cascade = CascadeStyle.None, Access = "nosetter.camelcase")]
-        [Key(1)]
-        [Column(2, Name = "SELLER_ID", NotNull = true)]
-        [OneToMany(3, ClassType = typeof(Item))]
         public virtual ISet<Item> Items
         {
             get { return items; }
         }
 
-        [Set(0, Inverse = true, Cascade = CascadeStyle.AllDeleteOrphan, Access = "nosetter.camelcase")]
-        [Key(1)]
-        [Column(2, Name = "USER_ID", NotNull = true)]
-        [OneToMany(3, ClassType = typeof(BillingDetails))]
         public virtual ISet<BillingDetails> BillingDetails
         {
             get { return billingDetails; }
         }
 
+        #endregion
 
         public virtual void AddItem(Item item)
         {
@@ -166,7 +159,6 @@ namespace Zee.Sample.CaveatEmptor.Model
                 throw new ArgumentException("Can't add a null Item.");
             Items.Add(item);
         }
-
 
         /// <summary> Adds a BillingDetails to the set.
         /// 
@@ -188,7 +180,6 @@ namespace Zee.Sample.CaveatEmptor.Model
                 DefaultBillingDetails = billingDetails;
             }
         }
-
 
         /// <summary> Removes a BillingDetails from the set.
         /// 
@@ -267,16 +258,11 @@ namespace Zee.Sample.CaveatEmptor.Model
         /// These class allow use of Mapping Attributes to work 
         /// with components. Not that this isn't a very elegant solution.
         /// </summary>
-        [Component(Name = "BillingAddress")]
         private class BillingAddressComponent : Address
         {
-            [Property(Column = "BILLING_CITY", Name = "City")]
-            [Property(Column = "BILLING_STREET", Name = "Street")]
-            [Property(Column = "BILLING_ZIP_CODE", Name = "Zipcode")]
             private string ingoreMe;
         }
 
         #endregion
-        
     }
 }

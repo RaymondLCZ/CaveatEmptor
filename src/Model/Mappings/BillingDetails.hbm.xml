@@ -3,13 +3,30 @@
                    assembly="Zee.Sample.CaveatEmptor.Model"
                    namespace="Zee.Sample.CaveatEmptor.Model">
 
-  <class name="User" schema ="TestDB.dbo" table="BILLING_DETAILS">
-    <id name="Id" column="BILLING_DETAILS_ID" access="field">
+  <class name="BillingDetails" schema ="TestDB.dbo" table="BILLING_DETAILS">
+    <id name="id" column="BILLING_DETAILS_ID" access="field" type="Int64">
       <generator class="native" />
     </id>
 
+    <version name="version" column="VERSION" access="field" />
     <property name="OwnerName" column="OWNER_NAME" />
-    <property name="Created" column="CREATED" access="field" not-null="true" />
+    <property name="created" column="CREATED" access="field" not-null="true" />
+    <many-to-one name="user" column="USER_ID" access="field" update="false" outer-join="false" />
+
+    <joined-subclass name="CreditCard" table="CREDIT_CARD">
+      <key column="CREDIT_CARD_ID" foreign-key="FK1_CREDIT_CARD_ID" />
+      <property name="type" column="CC_TYPE" access="field" not-null="true" />
+      <property name="number" column="CC_NUMBER" access="field" length="16" />
+      <property name="expMonth" column="EXP_MONTH" access="field" not-null="true" update="false" length="2" />
+      <property name="expYear" column="EXP_YEAR" access="field" not-null="true" update="false" length="4" />
+    </joined-subclass>
+
+    <joined-subclass name="BankAccount" table="BANK_ACCOUNT">
+      <key column="BANK_ACCOUNT_ID" foreign-key="FK1_BANK_ACCOUNT_ID" />
+      <property name="Number" column="ACCOUNT_NUMBER" length="16" />
+      <property name="BankName" column="BANK_NAME" not-null="true" length="255" />
+      <property name="BankSwift" column="BANK_SWIFT" not-null="true" length="15" />
+    </joined-subclass>
     
   </class>
 </hibernate-mapping>

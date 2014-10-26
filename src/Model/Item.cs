@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Iesi.Collections;
+using Zee.Sample.CaveatEmptor.Model.Exceptions;
 
 namespace Zee.Sample.CaveatEmptor.Model
 {
@@ -25,6 +26,7 @@ namespace Zee.Sample.CaveatEmptor.Model
     [Serializable]
     public class Item : IComparable, IAuditable
     {
+        #region member field
         private long id;
         private readonly IList bids = new ArrayList();
         private readonly ISet categorizedItems = new HashedSet();
@@ -41,9 +43,10 @@ namespace Zee.Sample.CaveatEmptor.Model
         private ItemState state;
         private Bid successfulBid;
         private int version;
+        #endregion
 
         #region IAuditable Members
-        public long Id
+        public virtual long Id
         {
             get { return id; }
         }

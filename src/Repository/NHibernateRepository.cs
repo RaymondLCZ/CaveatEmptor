@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Zee.Sample.CaveatEmptor.Model
+using Zee.Sample.CaveatEmptor.Model;
 using NHibernate;
 
 namespace Zee.Sample.CaveatEmptor.Repository
@@ -30,6 +30,14 @@ namespace Zee.Sample.CaveatEmptor.Repository
                 throw ex;
             }
         }
+
+        public  T FindBy(Object id) 
+        {
+            ISession session = NHibernateHelper.OpenSession();
+            return session.Get<T>(id);
+        }
+        
+        //Return SessionProvider.Session.Get(Of T)(id)
 
         public IList<T> FindAdd()
         {

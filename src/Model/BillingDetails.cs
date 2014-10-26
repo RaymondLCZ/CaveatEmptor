@@ -36,6 +36,7 @@ namespace Zee.Sample.CaveatEmptor.Model
         private string ownerName;
         private int version;
 
+        #region constructor
         /// <summary> 
         /// No-arg constructor for tools.
         /// </summary>
@@ -51,6 +52,7 @@ namespace Zee.Sample.CaveatEmptor.Model
             this.ownerName = ownerName;
             this.user = user;
         }
+        #endregion
 
         #region Common Methods
 
@@ -104,8 +106,6 @@ namespace Zee.Sample.CaveatEmptor.Model
         /// <remarks>
         /// Bidirectional, required as BillingDetails is USER_ID NOT NULL. This is also a read-only property that will never be updated.
         /// </remarks>
-        [ManyToOne(Update = false, OuterJoin = OuterJoinStrategy.False, Column = "USER_ID",
-            Access = "nosetter.camelcase")]
         public virtual User User
         {
             get { return user; }
@@ -119,7 +119,6 @@ namespace Zee.Sample.CaveatEmptor.Model
             get { return created; }
         }
 
-        [Version(Column = "VERSION", Access = "nosetter.camelcase")]
         public virtual int Version
         {
             get { return version; }

@@ -1,17 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
                    assembly="Zee.Sample.CaveatEmptor.Model"
                    namespace="Zee.Sample.CaveatEmptor.Model">
 
-  <class name="Category" schema ="TestDB.dbo" table="Category">
-    <id name="Id" >
+  <class name="Category" schema ="TestDB.dbo" table="CATEGORY">
+    <id name="id" column="CATEGORY_ID" access="field" >
       <generator class="native" />
     </id>
     
-    <property name="Name" column="name" />
-    <many-to-one name="ParentCategory" cascade="all" />
+    <property name="Name" column="NAME" not-null="true" length="255" unique-key="UNIQUE_NAME_AT_LEVEL" />
+    <many-to-one name="ParentCategory" foreign-key="FK1_PARENT_CATEGORY_ID" outer-join="false">
+      <column name="PARENT_CATEGORY_ID" not-null="false" />
+    </many-to-one>
+
+    <set name="childCategories" access="field" inverse="true" cascade="all-delete-orphan" batch-size="10">
+      <key column="PARENT_CATEGORY_ID" />
+      <one-to-many class="Category"/>
+    </set>
+
+    <property name="created" column="CREATED" access="field" not-null="true" update="false" />
   </class>
 
 </hibernate-mapping>

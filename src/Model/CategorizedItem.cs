@@ -17,23 +17,23 @@ namespace Zee.Sample.CaveatEmptor.Model
     /// </summary>
     /// <remarks>
     /// This is really a very special mapping. The CategorizedItem class
-    // represents an association table. The ER model for this is really
-    // a many-to-many association, but instead of two entities and two
-    // collections, we mapped this as two one-to-many associations between
-    // three entities. One of the motivation for this are the additional
-    // attributes on the association table (not only two FKs): username
-    // and creation date.
-    //
-    // This class is the entity in the middle, between Category and Item.
-    // You can see that it has references to both. The trick is the usage
-    // of update="false" insert="false" on the <many-to-one> mapping
-    // elements. The foreign/primary key columns of the association table
-    // is therefore managed by the <key-property> mappings in the composite
-    // key.
-    //
-    // Note that the composite key is encapsulated in an inner class, which
-    // simplifies the implementation of equals/hashCode. We recommend to
-    // always use a separate composite key class.
+    /// represents an association table. The ER model for this is really
+    /// a many-to-many association, but instead of two entities and two
+    /// collections, we mapped this as two one-to-many associations between
+    /// three entities. One of the motivation for this are the additional
+    /// attributes on the association table (not only two FKs): username
+    /// and creation date.
+    ///
+    /// This class is the entity in the middle, between Category and Item.
+    /// You can see that it has references to both. The trick is the usage
+    /// of update="false" insert="false" on the <many-to-one> mapping
+    /// elements. The foreign/primary key columns of the association table
+    /// is therefore managed by the <key-property> mappings in the composite
+    /// key.
+    ///
+    /// Note that the composite key is encapsulated in an inner class, which
+    /// simplifies the implementation of equals/hashCode. We recommend to
+    /// always use a separate composite key class.
     /// </remarks>
     /// <seealso cref="Category">
     /// </seealso>
@@ -48,6 +48,7 @@ namespace Zee.Sample.CaveatEmptor.Model
         private readonly Item item;
         private readonly string username; // This could also be an association to User
 
+        #region constructor
         /// <summary> 
         /// No-arg constructor for tools.
         /// </summary>
@@ -72,6 +73,7 @@ namespace Zee.Sample.CaveatEmptor.Model
             category.CategorizedItems.Add(this);
             item.CategorizedItems.Add(this);
         }
+        #endregion
 
         #region Common Methods
 

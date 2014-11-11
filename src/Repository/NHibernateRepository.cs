@@ -17,8 +17,8 @@ namespace Zee.Sample.CaveatEmptor.Repository
             {
                 session = NHibernateHelper.OpenSession();
                 trans = session.BeginTransaction();
-                //session.SaveOrUpdate(t);
-                session.Save(t);
+                session.SaveOrUpdate(t);
+                //session.Save(t);
                 session.Flush();
                 trans.Commit();
 

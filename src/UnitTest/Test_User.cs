@@ -19,33 +19,12 @@ namespace UnitTest
         private ISessionFactory _sessionFactory;
         private NHibernate.Cfg.Configuration _configuration;
 
-
         public Test_User()
         {
-            //
-            // TODO: 在此加入建構函式的程式碼
-            //
             _configuration = new NHibernate.Cfg.Configuration();
             _configuration.Configure();
         }
 
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///取得或設定提供目前測試回合
-        ///的相關資訊與功能的測試內容。
-        ///</summary>
-        public TestContext TestContext
-        {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
-        }
 
         #region 其他測試屬性
         //
@@ -93,6 +72,20 @@ namespace UnitTest
             User raymond = dao.FindBy(1L);
 
             Assert.AreEqual("Raymond", raymond.Firstname);
+        }
+
+        [TestCategory("User")]
+        [TestMethod]
+        public void Can_Add_Item()
+        {
+            UserRepository dao = new UserRepository();
+            User raymond = dao.FindBy(1L);
+
+            Item theItem = new Item("TestItem", "A item for test", raymond, new MonetaryAmount(100, "USD"), new MonetaryAmount(150, "USD"), DateTime.Today, DateTime.Today.AddMonths(1));
+
+            raymond.AddItem(theItem);
+
+            dao.SaveOrUpdate(raymond);
         }
 
     }

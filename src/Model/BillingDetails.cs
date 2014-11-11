@@ -92,6 +92,7 @@ namespace Zee.Sample.CaveatEmptor.Model
 
         #endregion
 
+        #region property
         public virtual long Id
         {
             get { return id; }
@@ -129,5 +130,6 @@ namespace Zee.Sample.CaveatEmptor.Model
         /// Check algorithm is implemented in subclasses.
         /// </summary>
         public abstract bool Valid { get; }
+        #endregion
     }
 }

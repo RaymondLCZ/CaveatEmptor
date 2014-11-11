@@ -35,9 +35,7 @@ namespace Zee.Sample.CaveatEmptor.Repository
         {
             ISession session = NHibernateHelper.OpenSession();
             return session.Get<T>(id);
-        }
-        
-        //Return SessionProvider.Session.Get(Of T)(id)
+        }        
 
         public IList<T> FindAdd()
         {

@@ -14,7 +14,8 @@
       <column name="PARENT_CATEGORY_ID" not-null="false" />
     </many-to-one>
 
-    <set name="childCategories" access="field" inverse="true" cascade="all-delete-orphan" batch-size="10">
+    <!--  cascade="all-delete-orphan" -->
+    <set name="childCategories" access="field" inverse="true" batch-size="10">
       <key column="PARENT_CATEGORY_ID" />
       <one-to-many class="Category"/>
     </set>

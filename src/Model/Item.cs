@@ -232,8 +232,7 @@ namespace Zee.Sample.CaveatEmptor.Model
         /// This method may throw a BusinessException if one of the requirements
         /// for the bid placement wasn't met, e.g. if the auction already ended.
         /// </summary>
-        /// <param name="bidder">
-        /// </param>
+        /// <param name="bidder"></param>
         /// <param name="bidAmount">
         /// </param>
         /// <param name="currentMaxBid"> the most valuable bid for this item

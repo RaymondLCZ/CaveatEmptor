@@ -10,11 +10,11 @@
     </id>
     
     <property name="Name" column="NAME" not-null="true" length="255" unique-key="UNIQUE_NAME_AT_LEVEL" />
-    <many-to-one name="ParentCategory" foreign-key="FK1_PARENT_CATEGORY_ID" outer-join="false">
+    <many-to-one name="ParentCategory" foreign-key="FK1_PARENT_CATEGORY_ID" outer-join="false" cascade="save-update">
       <column name="PARENT_CATEGORY_ID" not-null="false" />
     </many-to-one>
 
-    <set name="childCategories" access="field" inverse="true" cascade="all-delete-orphan" batch-size="10">
+    <set name="childCategories" access="field" inverse="true" cascade="none" batch-size="10">
       <key column="PARENT_CATEGORY_ID" />
       <one-to-many class="Category"/>
     </set>

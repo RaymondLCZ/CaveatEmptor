@@ -25,12 +25,25 @@ namespace UnitTest
         [TestMethod()]
         public void Can_Add_Category()
         {
+            Category publications = new Category("Publications");
+            Category books = new Category("Books");
+            Category magazine = new Category("Magazine");
+
+            publications.AddChildCategory(books);
+            publications.AddChildCategory(magazine);
+
+            Category travelMagazine = new Category("Travel Magazine");
+            magazine.AddChildCategory(travelMagazine);
+
             using (ISession session = _sessionFactory.OpenSession())
             {
                 using (session.BeginTransaction())
                 {
-                    Category computer = new Category("Computer");
-                    session.Save(computer);
+                    // 如果 ParentCategory 中 many-to-one 的cascade="save-update", save子物件會自動向上transitive；反之如設為none則會出現exception.
+                    //session.Save(travelMagazine);
+
+                    // save 父物件要自動向下transitive，需要在 set 中設 cascade="save-update"    
+                    session.Save(publications);
                     session.Transaction.Commit();
                 }
             }
@@ -40,17 +53,31 @@ namespace UnitTest
         [TestMethod]
         public void Can_Add_ChildCategory()
         {
+            Category electronics = new Category("Electronics");
+            Category computer = new Category("Computer");
+            //computer.ParentCategory = electronics;
+            electronics.AddChildCategory(computer);
+
+            using (ISession session = _sessionFactory.OpenSession())
+            {
+                using (session.BeginTransaction())
+                {                    
+                    session.Save(electronics);
+                    session.Transaction.Commit();
+                }
+            }
+
+
+            Category laptops = new Category("Laptops");
+            laptops.ParentCategory = computer;
+            computer.ChildCategories.Add(laptops);
+
             using (ISession session = _sessionFactory.OpenSession())
             {
                 using (session.BeginTransaction())
                 {
-                    Category computer = session.Get<Category>(1L);
-
-                    Category laptops = new Category("Laptops");
-                    laptops.ParentCategory = computer;
-                    computer.ChildCategories.Add(laptops);
-
-                    session.SaveOrUpdate(computer);
+                    session.Save(laptops);
+                    //session.SaveOrUpdate(computer);
                     session.Transaction.Commit();
                 }
             }

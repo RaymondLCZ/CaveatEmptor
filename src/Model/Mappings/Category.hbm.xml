@@ -11,7 +11,7 @@
     
     <version name="version" column="VERSION" access="field" />
     <property name="Name" column="NAME" not-null="true" length="255" unique-key="UNIQUE_NAME_AT_LEVEL" />
-    <many-to-one name="ParentCategory" foreign-key="FK1_PARENT_CATEGORY_ID" outer-join="false" cascade="none">
+    <many-to-one name="ParentCategory" foreign-key="FK1_PARENT_CATEGORY_ID" outer-join="false" cascade="none" lazy="proxy">
       <column name="PARENT_CATEGORY_ID" not-null="false" />
     </many-to-one>
 
